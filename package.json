@@ -1,20 +1,20 @@
 {
   "name": "elm-starter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Starter project for working with Elm",
-  "main": "main.js",
   "scripts": {
-    "start": "concurrently  --prefix \"[{index}] [{time}] {name}\" -n \"HTTP,Elm ,CSS \" -c \"red,yellow,blue\" \"python -m SimpleHTTPServer\" \"npm run watch-js\" \"npm run watch-css\"",
-    "build-js": "elm make src/Main.elm --output=main.js",
-    "watch-js": "chokidar 'src/**/*.elm' -c 'npm run build-js'",
-    "watch-css": "chokidar 'css/**/*.css' -c 'echo \"CSS Updated\"'"
+    "start": "node server.js",
+    "dist": "webpack"
   },
   "author": "Matthew Simo <matthew.a.simo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "chokidar-cli": "^1.2.0",
-    "concurrently": "^2.1.0",
-    "elm": "^0.17.0"
+    "elm": "^0.17.0",
+    "elm-webpack-loader": "^3.0.0",
+    "express": "^4.13.4",
+    "webpack": "^1.13.0",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {}
 }
