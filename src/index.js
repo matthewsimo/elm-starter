@@ -1,3 +1,5 @@
+
+var startColor = "red";
+
 var Elm = require('./Main');
-Elm.Main.fullscreen();
-//Elm.Main.embed(document.getElementById('main'));
+Elm.Main.fullscreen(startColor);

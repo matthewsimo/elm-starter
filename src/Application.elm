@@ -1,4 +1,10 @@
-module Application exposing (init, update, view, subscriptions)
+module Application exposing
+  ( Model
+  , init
+  , update
+  , view
+  , subscriptions
+  )
 
 import Debug
 import Html
@@ -24,18 +30,28 @@ type alias Model =
 
 -- Init
 
-init : ( Model, Cmd Msg )
-init =
+startColor : String
+startColor = "pink"
+
+
+emptyModel : Model
+emptyModel =
   { window = { width = 0, height = 0 }
   , mouse = { x = 0, y = 0 }
   , isMouseDown = False
   , color = startColor
   , colors = [startColor]
   }
-    ! [ initWindowSize ]
 
-startColor : String
-startColor = "pink"
+
+init : Maybe String -> ( Model, Cmd Msg )
+init initColor =
+  let
+    initModel = case initColor of
+      Just initColor -> { emptyModel | color = initColor, colors = [initColor] }
+      _ -> emptyModel
+  in
+  initModel ! [ initWindowSize ]
 
 
 initWindowSize : Cmd Msg
