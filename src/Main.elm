@@ -1,9 +1,9 @@
-import Application exposing (Model, init, update, view, subscriptions)
-import Html.App as App
+import App exposing (Model, init, update, view, subscriptions)
+import Html.App
 
 main : Program (Maybe String)
 main =
-  App.programWithFlags
+  Html.App.programWithFlags
     { init = init
     , update = update
     , view = view

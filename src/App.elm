@@ -1,4 +1,4 @@
-module Application exposing
+module App exposing
   ( Model
   , init
   , update
@@ -17,7 +17,7 @@ import Html exposing (..)
 import Html.Events exposing (onClick, onMouseDown, onMouseUp)
 import Html.Attributes exposing (style)
 
-import Application.Colors exposing ( colors, getColor, randomColor )
+import Components.Colors exposing ( colors, getColor, randomColor )
 
 type alias Model =
   { window: Size
@@ -118,6 +118,7 @@ view model =
     , style [ ("width", "100vw")
             , ("height", "100vh")
             , ("padding", "1rem")
+            , ("box-sizing", "border-box")
             , ("backgroundColor", backgroundColor model )
             ]
     ]

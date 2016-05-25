@@ -1,4 +1,4 @@
-module Application.Colors exposing ( colors, getColor, randomColor )
+module Components.Colors exposing ( colors, getColor, randomColor )
 
 import Random
 import Array exposing (Array, get, length, fromList)
