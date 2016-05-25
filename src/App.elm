@@ -10,7 +10,8 @@ import Debug
 import Html
 import Task
 import Random
-import List exposing ( (::), map )
+import Array exposing ( get, fromList )
+import List exposing ( head, tail, (::), map )
 import Window exposing ( Size )
 import Mouse exposing ( Position )
 import Html exposing (..)
@@ -67,6 +68,7 @@ type Msg
   = WindowResize Size
   | MouseMoves Position
   | RandomColor
+  | PreviousColor
   | NewColor Int
   | MouseDown
   | MouseUp
@@ -78,6 +80,10 @@ update action model =
     RandomColor ->
       (model, Random.generate NewColor randomColor)
 
+    PreviousColor ->
+      ({ model | color = ( previousColor model.colors startColor )
+               , colors = ( ( previousColor model.colors startColor ) :: model.colors )}
+      , Cmd.none)
 
     NewColor color ->
       ({ model | color = ( getColor color )
@@ -126,7 +132,9 @@ view model =
     , ul [] [ li [] [ text (toString model.isMouseDown) ]
             , listItem ( toString model.mouse )
             , listItem (toString model.window)
-            , li [] [ button [ onClick RandomColor ] [ text "Random" ] ]
+            , li [] [ button [ onClick RandomColor ] [ text "Random" ]
+                    , button [ onClick PreviousColor ] [ text "Previous" ]
+                    ]
             , listItem ("current: " ++ toString model.color)
             , li [] [ ol [] ( map listItem model.colors ) ]
             ]
@@ -143,4 +151,14 @@ backgroundColor model =
   case model.isMouseDown of
     True -> model.color
     False -> "white"
+
+
+previousColor: List a -> a -> a
+previousColor colors fallback =
+  let
+      previousItem = Debug.log "pItem" get 1 ( fromList colors )
+  in
+      case previousItem of
+        Just previousItem -> previousItem
+        _ -> fallback
 
